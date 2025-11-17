@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// Fungsi untuk konversi desimal ke basis lain
+void konversiBilangan(int bilangan, int basis) {
+    char hasil[100]; // Array untuk menyimpan hasil
+    int index = 0;
+    int sisa;
+
+    // Handle kasus bilangan 0
+    if (bilangan == 0) {
+        printf("Hasil konversi: 0\n");
+        return;
+    }
+
+    // Proses konversi
+    while (bilangan > 0) {
+        sisa = bilangan % basis;
+        bilangan = bilangan / basis;
+
+        // Konversi sisa ke karakter
+        if (sisa < 10) {
+            hasil[index] = sisa + '0'; // Angka 0-9
+        } else {
+            hasil[index] = sisa - 10 + 'A'; // Huruf A-F untuk basis > 10
+        }
+        index++;
+    }
+
+    hasil[index] = '\0'; // Akhiri string
+
+    // Balik string karena hasil konversi dibaca dari bawah ke atas
+    printf("Hasil konversi: ");
+    for (int i = index - 1; i >= 0; i--) {
+        printf("%c", hasil[i]);
+    }
+    printf("\n");
+}
+
+// Menu fitur nomor 5
+void menuDesimalKeBasis() {
+    int bilangan, basis;
+
+    printf("=== PROGRAM KONVERSI BILANGAN DESIMAL ===\n");
+
+    // Input bilangan dari user
+    printf("Masukkan bilangan desimal: ");
+    scanf("%d", &bilangan);
+
+    // Input basis tujuan
+    printf("Masukkan basis tujuan (2-16): ");
+    scanf("%d", &basis);
+
+    // Validasi input
+    if (basis < 2 || basis > 16) {
+        printf("Error: Basis harus antara 2 sampai 16!\n");
+        system("pause");
+        return;
+    }
+
+    if (bilangan < 0) {
+        printf("Error: Masukkan bilangan positif!\n");
+        system("pause");
+        return;
+    }
+
+    // Tampilkan hasil
+    printf("\n--- HASIL KONVERSI ---\n");
+    printf("Bilangan desimal: %d\n", bilangan);
+    printf("Basis tujuan: %d\n", basis);
+
+    konversiBilangan(bilangan, basis);
+
+    system("pause");
+}
+
+int main() {
+    int pilihan;
+//pilihan fitur
+    do {
+        system("cls");
+        printf("=======================================\n");
+        printf("===== TOOLKIT ASISTEN LAB ELEKTRO =====\n");
+        printf("1. Hukum Ohm\n");
+        printf("2. Daya Listrik\n");
+        printf("3. Resistor Seri\n");
+        printf("4. Resistor Paralel\n");
+        printf("5. Desimal ke Basis Lain\n");
+        printf("6. Biner ke Desimal\n");
+        printf("7. Oktal ke Desimal\n");
+        printf("8. Heksadesimal ke Desimal\n");
+        printf("9. Keluar\n");
+        printf("Pilih menu: ");
+        scanf("%d", &pilihan);
+        printf("=========================================\n");
+
+        switch (pilihan) {
+            case 5:
+                menuDesimalKeBasis();
+                break;
+
+            case 9:
+                printf("Terima kasih!\n");
+                break;
+
+            default:
+                printf("Fitur belum ditambahkan!\n");
+                system("pause");
+        }
+
+    } while (pilihan != 9);
+
+    return 0;
+}

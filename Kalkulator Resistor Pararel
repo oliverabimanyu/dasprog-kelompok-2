@@ -1,0 +1,61 @@
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    float R, total_kebalikan = 0, R_total;
+    
+    printf("=========================================\n");
+    printf("    KALKULATOR RESISTOR PARALEL\n");
+    printf("  1/Rtotal = 1/R1 + 1/R2 + ... + 1/Rn\n");
+    printf("=========================================\n\n");
+    
+    // Input jumlah resistor
+    printf("Masukkan jumlah resistor: ");
+    scanf("%d", &n);
+    
+    // Validasi jumlah resistor
+    if (n <= 0) {
+        printf("Error: Jumlah resistor harus lebih dari 0!\n");
+        return 1;
+    }
+    
+    printf("\n=== MASUKKAN NILAI RESISTOR ===\n");
+    
+    // Loop untuk input nilai setiap resistor
+    for (i = 1; i <= n; i++) {
+        printf("Masukkan nilai resistor R%d (Ohm): ", i);
+        scanf("%f", &R);
+        
+        // Validasi nilai resistor
+        if (R <= 0) {
+            printf("Error: Nilai resistor harus lebih besar dari 0!\n");
+            i--; // Mengulang input untuk resistor yang sama
+            continue;
+        }
+        
+        total_kebalikan += 1.0 / R; // Menambahkan kebalikan resistor ke akumulator
+    }
+    
+    // Menghitung hambatan total
+    R_total = 1.0 / total_kebalikan;
+    
+    // Menampilkan hasil perhitungan
+    printf("\n=== HASIL PERHITUNGAN ===\n");
+    printf("Jumlah resistor: %d\n", n);
+    printf("Rumus: 1/Rtotal = 1/R1 + 1/R2 + ... + 1/Rn\n");
+    printf("Total kebalikan = %.6f Siemens\n", total_kebalikan);
+    printf("Hambatan total (Rtotal) = %.2f Ohm\n", R_total);
+    
+    // Informasi tambahan
+    printf("\n=== INFORMASI TAMBAHAN ===\n");
+    printf("Karakteristik rangkaian paralel:\n");
+    printf("- Tegangan sama di semua resistor\n");
+    printf("- Arus terbagi di setiap resistor\n");
+    printf("- Hambatan total selalu lebih kecil dari resistor terkecil\n");
+    
+    printf("\n=========================================\n");
+    printf("Terima kasih telah menggunakan kalkulator!\n");
+    printf("=========================================\n");
+    
+    return 0;
+}

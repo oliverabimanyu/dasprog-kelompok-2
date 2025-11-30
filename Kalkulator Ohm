@@ -1,0 +1,93 @@
+#include <stdio.h>
+
+int main() {
+    char pilihan;
+    float V, I, R;
+    
+    printf("=========================================\n");
+    printf("      KALKULATOR HUKUM OHM\n");
+    printf("          (V = I × R)\n");
+    printf("=========================================\n\n");
+    
+    // Menampilkan menu pilihan
+    printf("Pilih besaran yang ingin dihitung:\n");
+    printf("V - Tegangan (Volt)\n");
+    printf("I - Arus (Ampere)\n");
+    printf("R - Hambatan (Ohm)\n");
+    printf("Masukkan pilihan (V/I/R): ");
+    scanf(" %c", &pilihan);
+    
+    printf("\n");
+    
+    switch(pilihan) {
+        case 'V':
+        case 'v':
+            // Menghitung Tegangan (V = I × R)
+            printf("Menghitung Tegangan (V)\n");
+            printf("Masukkan nilai Arus (I) dalam Ampere: ");
+            scanf("%f", &I);
+            printf("Masukkan nilai Hambatan (R) dalam Ohm: ");
+            scanf("%f", &R);
+            
+            if (R == 0) {
+                printf("Error: Hambatan tidak boleh nol!\n");
+            } else {
+                V = I * R;
+                printf("\n=== HASIL PERHITUNGAN ===\n");
+                printf("Rumus: V = I × R\n");
+                printf("V = %.2f A × %.2f Ω\n", I, R);
+                printf("Tegangan (V) = %.2f Volt\n", V);
+            }
+            break;
+            
+        case 'I':
+        case 'i':
+            // Menghitung Arus (I = V / R)
+            printf("Menghitung Arus (I)\n");
+            printf("Masukkan nilai Tegangan (V) dalam Volt: ");
+            scanf("%f", &V);
+            printf("Masukkan nilai Hambatan (R) dalam Ohm: ");
+            scanf("%f", &R);
+            
+            if (R == 0) {
+                printf("Error: Hambatan tidak boleh nol!\n");
+            } else {
+                I = V / R;
+                printf("\n=== HASIL PERHITUNGAN ===\n");
+                printf("Rumus: I = V / R\n");
+                printf("I = %.2f V / %.2f Ω\n", V, R);
+                printf("Arus (I) = %.2f Ampere\n", I);
+            }
+            break;
+            
+        case 'R':
+        case 'r':
+            // Menghitung Hambatan (R = V / I)
+            printf("Menghitung Hambatan (R)\n");
+            printf("Masukkan nilai Tegangan (V) dalam Volt: ");
+            scanf("%f", &V);
+            printf("Masukkan nilai Arus (I) dalam Ampere: ");
+            scanf("%f", &I);
+            
+            if (I == 0) {
+                printf("Error: Arus tidak boleh nol!\n");
+            } else {
+                R = V / I;
+                printf("\n=== HASIL PERHITUNGAN ===\n");
+                printf("Rumus: R = V / I\n");
+                printf("R = %.2f V / %.2f A\n", V, I);
+                printf("Hambatan (R) = %.2f Ohm\n", R);
+            }
+            break;
+            
+        default:
+            printf("Pilihan tidak valid! Silakan pilih V, I, atau R.\n");
+            break;
+    }
+    
+    printf("\n=========================================\n");
+    printf("Terima kasih telah menggunakan kalkulator!\n");
+    printf("=========================================\n");
+    
+    return 0;
+}

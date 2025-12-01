@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void oktakedesimal() {
+    char oktal[32];
+    long long hasil = 0;
+
+    printf("Masukkan bilangan oktal: ");
+    scanf("%s", oktal);
+
+    for (int i = 0; oktal[i] != '\0'; i++) {
+        int digit = oktal[i] - '0';
+
+        if (digit < 0 || digit > 7) {
+            printf("Input tidak valid.\n");
+            return;
+        }
+
+        hasil = hasil * 8 + digit;
+    }
+
+    printf("Desimal: %lld\n", hasil);
+}
+
+int main() {
+    oktakedesimal();
+    return 0;
+}

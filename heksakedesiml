@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <ctype.h>
+
+void heksakedesimal() {
+    char heksa[32];
+    long long hasil = 0;
+
+    printf("Masukkan bilangan heksadesimal: ");
+    scanf("%s", heksa);
+
+    for (int i = 0; heksa[i] != '\0'; i++) {
+        char c = toupper(heksa[i]);
+        int nilai;
+
+        if (c >= '0' && c <= '9') {
+            nilai = c - '0';
+        } else if (c >= 'A' && c <= 'F') {
+            nilai = c - 'A' + 10;
+        } else {
+            printf("Input tidak valid.\n");
+            return;
+        }
+
+        hasil = hasil * 16 + nilai;
+    }
+
+    printf("Desimal: %lld\n", hasil);
+}
+
+int main() {
+    heksakedesimal();
+    return 0;
+}

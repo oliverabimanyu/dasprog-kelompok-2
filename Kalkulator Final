@@ -1,0 +1,236 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+//Konversi Bilangan Desimal
+
+void konversiBilangan(int bilangan, int basis) {
+    char hasil[100];
+    int index = 0, sisa;
+
+    if (bilangan == 0) {
+        printf("Hasil konversi: 0\n");
+        return;
+    }
+
+    while (bilangan > 0) {
+        sisa = bilangan % basis;
+        bilangan /= basis;
+        if (sisa < 10)
+            hasil[index] = sisa + '0';
+        else
+            hasil[index] = sisa - 10 + 'A';
+        index++;
+    }
+
+    printf("Hasil konversi: ");
+    for (int i = index - 1; i >= 0; i--)
+        printf("%c", hasil[i]);
+    printf("\n");
+}
+
+void menuDesimalKeBasis() {
+    int bilangan, basis;
+
+    printf("Masukkan bilangan desimal: ");
+    scanf("%d", &bilangan);
+    printf("Masukkan basis tujuan (2-16): ");
+    scanf("%d", &basis);
+
+    if (basis < 2 || basis > 16 || bilangan < 0) {
+        printf("Input tidak valid!\n");
+        system("pause");
+        return;
+    }
+
+    konversiBilangan(bilangan, basis);
+    system("pause");
+}
+
+//Biner ke Desimal
+
+void binerkedesimal() {
+    char biner[64];
+    long long hasil = 0;
+
+    printf("Masukkan bilangan biner: ");
+    scanf("%s", biner);
+
+    for (int i = 0; biner[i]; i++) {
+        if (biner[i] == '0' || biner[i] == '1')
+            hasil = hasil * 2 + (biner[i] - '0');
+        else {
+            printf("Input tidak valid.\n");
+            system("pause");
+            return;
+        }
+    }
+
+    printf("Desimal: %lld\n", hasil);
+    system("pause");
+}
+
+//Oktal Ke Desimal
+
+void oktakedesimal() {
+    char oktal[32];
+    long long hasil = 0;
+
+    printf("Masukkan bilangan oktal: ");
+    scanf("%s", oktal);
+
+    for (int i = 0; oktal[i]; i++) {
+        int digit = oktal[i] - '0';
+        if (digit < 0 || digit > 7) {
+            printf("Input tidak valid.\n");
+            system("pause");
+            return;
+        }
+        hasil = hasil * 8 + digit;
+    }
+
+    printf("Desimal: %lld\n", hasil);
+    system("pause");
+}
+
+//Heksa ke Desimal
+
+void heksakedesimal() {
+    char heksa[32];
+    long long hasil = 0;
+
+    printf("Masukkan bilangan heksadesimal: ");
+    scanf("%s", heksa);
+
+    for (int i = 0; heksa[i]; i++) {
+        char c = toupper(heksa[i]);
+        int nilai;
+
+        if (c >= '0' && c <= '9')
+            nilai = c - '0';
+        else if (c >= 'A' && c <= 'F')
+            nilai = c - 'A' + 10;
+        else {
+            printf("Input tidak valid.\n");
+            system("pause");
+            return;
+        }
+
+        hasil = hasil * 16 + nilai;
+    }
+
+    printf("Desimal: %lld\n", hasil);
+    system("pause");
+}
+
+//Hukum Ohm
+
+void hukumOhm() {
+    char pilihan;
+    float V, I, R;
+
+    printf("Pilih (V/I/R): ");
+    scanf(" %c", &pilihan);
+
+    switch (pilihan) {
+        case 'V': case 'v':
+            scanf("%f %f", &I, &R);
+            printf("V = %.2f\n", I * R);
+            break;
+        case 'I': case 'i':
+            scanf("%f %f", &V, &R);
+            printf("I = %.2f\n", V / R);
+            break;
+        case 'R': case 'r':
+            scanf("%f %f", &V, &I);
+            printf("R = %.2f\n", V / I);
+            break;
+        default:
+            printf("Pilihan tidak valid.\n");
+    }
+    system("pause");
+}
+
+//Daya Listrik
+
+void hitungDaya() {
+    float V, I;
+    printf("Masukkan V dan I: ");
+    scanf("%f %f", &V, &I);
+    printf("P = %.2f\n", V * I);
+    system("pause");
+}
+
+//Resistor Seri
+
+void resistorSeri() {
+    int n;
+    float R, Rtotal = 0;
+
+    printf("Masukkan jumlah resistor: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Masukkan nilai resistor ke-%d: ", i + 1);
+        scanf("%f", &R);
+        Rtotal += R;
+    }
+
+    printf("Rtotal = %.2f\n", Rtotal);
+    system("pause");
+}
+
+//Resistor Paralel
+
+void resistorParalel() {
+    int n;
+    float R, total_kebalikan = 0;
+
+    printf("Masukkan jumlah resistor: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Masukkan nilai resistor ke-%d: ", i + 1);
+        scanf("%f", &R);
+        total_kebalikan += 1.0 / R;
+    }
+
+    printf("Rtotal = %.2f\n", 1.0 / total_kebalikan);
+    system("pause");
+}
+
+//Main menu
+
+int main() {
+    int pilihan;
+
+    do {
+        system("cls");
+        printf("===== TOOLKIT ASISTEN LAB ELEKTRO =====\n");
+        printf("1. Hukum Ohm\n");
+        printf("2. Daya Listrik\n");
+        printf("3. Resistor Seri\n");
+        printf("4. Resistor Paralel\n");
+        printf("5. Desimal ke Basis\n");
+        printf("6. Biner ke Desimal\n");
+        printf("7. Oktal ke Desimal\n");
+        printf("8. Heksa ke Desimal\n");
+        printf("9. Keluar\n");
+        printf("Pilih menu: ");
+        scanf("%d", &pilihan);
+
+        switch (pilihan) {
+            case 1: hukumOhm(); break;
+            case 2: hitungDaya(); break;
+            case 3: resistorSeri(); break;
+            case 4: resistorParalel(); break;
+            case 5: menuDesimalKeBasis(); break;
+            case 6: binerkedesimal(); break;
+            case 7: oktakedesimal(); break;
+            case 8: heksakedesimal(); break;
+        }
+    } while (pilihan != 9);
+
+    return 0;
+}
